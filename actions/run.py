@@ -15,8 +15,8 @@ class NetboxHTTPAction(NetboxBaseAction):
         StackStorm action entry point.
         """
         if http_verb == "get":
-            if get_detail_route_eligible and "id" in kwargs:
-                id_param = kwargs["id"]
+            id_param = kwargs.get("id")
+            if get_detail_route_eligible and id_param:
                 # Scalar or 1-elem list -> detail route; multi-elem list -> list filter
                 if isinstance(id_param, (list, tuple)):
                     if len(id_param) == 1:
